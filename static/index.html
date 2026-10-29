@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCOUTY | Discover your next role</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css?v=6.0.0">
+<style>/* Critical styles: sign-in stays usable even with a stale/missing CSS file */
+#auth-screen:not(.hidden){position:fixed!important;inset:0!important;z-index:99999!important;display:grid!important;place-items:center!important;background:#0c1020!important;color:#f3f4ff!important;padding:20px!important;font-family:Arial,sans-serif!important}
+#auth-screen.hidden{display:none!important}
+#auth-screen .auth-box{width:min(420px,100%);box-sizing:border-box;padding:32px;border:1px solid #353b59;border-radius:20px;background:#171e31;box-shadow:0 15px 60px #0007}
+#auth-screen h1{color:#a18aff;font-size:34px;margin:0 0 10px}
+#auth-screen p{color:#b9c3dc}
+#auth-screen h2{margin:22px 0 12px}
+#auth-screen form{display:grid;gap:12px}
+#auth-screen input{box-sizing:border-box;width:100%;padding:13px;border:1px solid #414967;border-radius:9px;background:#0d1424;color:white;font-size:15px}
+#auth-screen button{padding:13px;border:0;border-radius:10px;cursor:pointer;font-weight:700}
+#auth-screen #auth-submit{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white}
+#auth-screen #toggle-auth{margin-top:12px;background:none;color:#b6a6ff}
+#auth-screen #auth-error{color:#ff9ca9}
+</style>
+</head>
+<body>
+
+<section id="auth-screen" class="auth-screen"><div class="auth-box glass"><h1>SCOUTY</h1><p>Personalized job discovery • CV matching</p><h2 id="auth-title">Sign in</h2><form id="auth-form"><input id="auth-email" type="email" placeholder="Email" required autocomplete="email"><input id="auth-password" type="password" placeholder="Password (8+ characters)" required minlength="8"><button class="btn btn-primary" type="submit" id="auth-submit">Sign in</button></form><button class="plain-link" id="toggle-auth">Create an account instead</button><p id="auth-error" class="error-message"></p></div></section>
+
+    <div class="app-layout">
+        <!-- Top Navigation Header -->
+        <header class="navbar-top">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-brain-circuit"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>SCOUTY</h2>
+                </div>
+            </div>
+
+            <!-- Top Horizontal Navigation Tabs -->
+            <nav class="top-nav-tabs">
+                <button class="nav-tab active" data-filter="All">
+                    <i class="fa-solid fa-layer-group"></i> All Openings <span class="badge" id="badge-total">0</span>
+                </button>
+                <button class="nav-tab" data-filter="Internship">
+                    <i class="fa-solid fa-user-graduate"></i> Internships <span class="badge high-badge" id="badge-internships">0</span>
+                </button>
+                <button class="nav-tab" data-filter="Job">
+                    <i class="fa-solid fa-briefcase"></i> Jobs <span class="badge" id="badge-junior">0</span>
+                </button>
+                <button class="nav-tab" data-filter="High">
+                    <i class="fa-solid fa-bolt"></i> High Matches <span class="badge high-badge" id="badge-high">0</span>
+                </button>
+                <button class="nav-tab" data-filter="Saved">
+                    <i class="fa-solid fa-bookmark"></i> Saved <span class="badge" id="badge-saved">0</span>
+                </button>
+                <button class="nav-tab" data-filter="Applied">
+                    <i class="fa-solid fa-paper-plane"></i> Applied <span class="badge" id="badge-applied">0</span>
+                </button>
+            </nav>
+
+            <div class="header-actions"><button class="btn btn-secondary" id="btn-profile">My CV</button><button class="btn btn-secondary" id="btn-logout">Log out</button>
+                <button class="btn btn-secondary" id="btn-scrape">
+                    <i class="fa-solid fa-arrows-rotate" id="scrape-icon"></i> Scrape Openings
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-workspace">
+            <section class="discovery glass"><div class="search-eyebrow"><i class="fa-solid fa-sparkles"></i> YOUR NEXT OPPORTUNITY STARTS HERE</div><div class="search-intro"><div><h1>Find work that <span>fits you.</span></h1><p>Real openings. Better filters. Clearer matches — across trusted job sources.</p></div><div class="search-status"><span class="live-dot"></span> LIVE JOB DISCOVERY</div></div><form id="live-search-form"><label for="live-search">Job title or primary skill</label><div class="discovery-row"><select id="job-source" aria-label="Job source"><option value="all">All sources • Recommended</option><option value="himalayas">Himalayas • Remote</option><option value="remotive">Remotive • Remote</option><option value="remoteok">Remote OK • Remote</option><option value="arbeitnow">Arbeitnow • Europe / Remote</option></select><input id="live-search" placeholder="Try Python Developer, Data Analyst, AI Engineer..." required minlength="2"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Find jobs</button><a id="provider-link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" href="https://himalayas.app/jobs">Browse source</a></div></form><div class="quick-search"><span>Popular searches</span><button type="button" data-query="Python Developer">Python Developer</button><button type="button" data-query="Data Analyst">Data Analyst</button><button type="button" data-query="AI Engineer">AI Engineer</button><button type="button" data-query="Internship">Internships</button></div><p id="search-message" role="status" aria-live="polite">Search results are retrieved on request. Links are from the provider; listing availability is not guaranteed.</p></section>
+            <!-- Search & Filter Controls Bar -->
+            <section class="controls-bar glass">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Search by title, skill (Python, NLP, SQL), or company...">
+                </div>
+
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select id="type-select">
+                        <option value="All" selected>All Categories</option>
+                        <option value="Job">Job</option>
+                        <option value="Internship">Internship</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select id="status-select">
+                        <option value="All" selected>All Statuses</option>
+                        <option value="New">New Unread</option>
+                        <option value="Saved">Saved</option>
+                        <option value="Applied">Applied</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Min Score:</label>
+                    <input type="range" id="score-slider" min="0" max="90" value="0" step="5">
+                    <span id="score-val">0%</span>
+                </div>
+            </section>
+
+            <!-- Dashboard Stats Grid -->
+            <section class="stats-grid">
+                <div class="stat-card glass">
+                    <div class="stat-icon icon-purple">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-label">Total Openings</span>
+                        <h3 id="stat-total">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card glass">
+                    <div class="stat-icon icon-cyan">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-label">Internships</span>
+                        <h3 id="stat-internships">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card glass">
+                    <div class="stat-icon icon-green">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-label">Jobs</span>
+                        <h3 id="stat-junior">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card glass">
+                    <div class="stat-icon icon-gold">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-label">Estimated High Matches (≥70%)</span>
+                        <h3 id="stat-high">0</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Candidate Profile Summary Pill -->
+            <section class="profile-pill glass">
+                <div class="profile-skills-header">
+                    <i class="fa-solid fa-user-gear"></i> Candidate Skills Matrix (<span class="candidate-name">Your profile</span>):
+                </div>
+                <div class="skills-tags" id="profile-skills-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- Job Cards Grid -->
+            <section class="jobs-grid" id="jobs-container">
+                <!-- Job cards rendered dynamically -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <i class="fa-solid fa-bell"></i> <span id="toast-msg">Action completed</span>
+    </div>
+
+    <script src="/static/app.js?v=6.0.0"></script>
+<dialog id="profile-dialog" class="profile-dialog"><div class="dialog-inner"><div class="dialog-heading"><h2>Your CV / Profile</h2><button type="button" id="profile-close">✕</button></div><p>Upload PDF, DOCX, TXT (up to 5 MB) or fill the fields manually. Review extracted text before matching.</p><form id="cv-upload-form"><input id="cv-file" type="file" accept=".pdf,.docx,.txt"><button class="btn btn-secondary" type="submit">Upload CV</button></form><form id="profile-form"><label>Name<input name="name" placeholder="Full name"></label><label>Title<input name="title" placeholder="e.g. Data Analyst"></label><label>Email<input name="email" type="email"></label><label>Phone<input name="phone"></label><label>Location<input name="location"></label><label>Target role<input name="target_role" placeholder="e.g. Python Developer"></label><label>Skills (comma separated)<textarea name="skills" rows="2"></textarea></label><label>Languages (comma separated)<input name="languages"></label><label>Years of experience<input name="years_experience" type="number" step="0.5" min="0"></label><label>University<input name="university"></label><label>Education<textarea name="education"></textarea></label><label>Professional summary<textarea name="summary"></textarea></label><label>Experience<textarea name="experience"></textarea></label><label>Projects<textarea name="projects"></textarea></label><button class="btn btn-primary" type="submit">Save profile</button><button class="btn btn-secondary" id="download-cv" type="button">Download CV as PDF</button></form><p id="profile-message"></p></div></dialog>
+
+</body>
+</html>

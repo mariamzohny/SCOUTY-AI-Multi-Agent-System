@@ -1,0 +1,56 @@
+
+============ test_smoke.py ============
+WARNING:root:Provider remoteok error: Provider inaccessible
+PASS GET / 307
+PASS GET /static/index.html 200
+PASS GET /static/app.js 200
+PASS GET /api/version 200
+PASS GET /api/profile 401
+PASS POST /api/register 200
+PASS POST /api/register 409
+PASS GET /api/profile 200
+PASS PUT /api/profile 200
+PASS POST /api/profile/upload 200
+PASS GET /api/profile/download 200
+PASS GET /api/jobs 200
+PASS GET /api/stats 200
+PASS GET /api/telegram 404
+PASS PUT /api/telegram 404
+PASS POST /api/notify 404
+PASS GET /api/email/settings 404
+PASS POST /api/search 200
+PASS GET /api/jobs 200
+PASS POST /api/jobs/smoke001/status 200
+PASS GET /api/jobs 200
+PASS POST /api/search 200
+PASS POST /api/logout 200
+PASS GET /api/profile 401
+PASS POST /api/login 200
+PASS GET /api/profile 200
+ALL SMOKE TESTS PASSED
+RESULT: PASS - test_smoke.py
+
+============ test_regression.py ============
+REGRESSION TESTS PASSED
+RESULT: PASS - test_regression.py
+
+============ test_v6.py ============
+V6 TESTS PASSED
+RESULT: PASS - test_v6.py
+
+============ test_search_matrix_v8.py ============
+WARNING:root:Provider remoteok error: 403 Forbidden
+PASS: 30 relevance cases + API stale/no-results/provider/saved state
+RESULT: PASS - test_search_matrix_v8.py
+
+============ test_free_providers_v9.py ============
+TWO NEW PROVIDER MOCK TESTS PASS
+RESULT: PASS - test_free_providers_v9.py
+
+============ test_provider_diagnostics.py ============
+WARNING:root:Provider remotive error: HTTP 503
+WARNING:root:Provider remotive error: HTTP 503
+PROVIDER DIAGNOSTICS PASSED
+RESULT: PASS - test_provider_diagnostics.py
+
+SUMMARY: 6/6 test scripts passed
