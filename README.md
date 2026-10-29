@@ -17,7 +17,7 @@ This project is available as a public portfolio demo on Vercel. It supports loca
 
 Watch SCOUTY AI in action:
 
-![SCOUTY AI Demo](screenshots/scouty-demo.gif)
+![SCOUTY AI Demo](screenshots/final_demo_high_quality.gif)
 
 ---
 
