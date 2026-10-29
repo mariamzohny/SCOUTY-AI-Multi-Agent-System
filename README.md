@@ -2,9 +2,24 @@
 
 # SCOUTY AI
 
-### A local-first, CV-aware job discovery platform
 
-**Discover relevant jobs. Understand skill matches. Keep track of applications.**
+## 🚀 Live Demo
+
+Explore SCOUTY AI directly in your browser:
+
+🌐 **[Launch SCOUTY AI](https://scouty-ai-multi-agent-system.vercel.app)**
+
+> Note: 
+This project is available as a public portfolio demo on Vercel. It supports local development with SQLite, while the hosted demo uses temporary storage and is not intended for persistent user data.
+
+
+## 🎥 Project Demo
+
+Watch SCOUTY AI in action:
+
+![SCOUTY AI Demo](screenshots/scouty-demo.gif)
+
+---
 
 Python · FastAPI · JavaScript · SQLite · Job feed integrations
 
